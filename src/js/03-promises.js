@@ -12,12 +12,9 @@ refs.form.addEventListener('submit', onBtnClick);
 
 function onBtnClick(e) {
   e.preventDefault();
-
   const amount = parseInt(refs.inputAmount.value);
   const delay = parseInt(refs.inputDelay.value);
   const delayStep = parseInt(refs.inputStep.value);
-
-  // console.log(delay, delayStep, amount);
 
   for (let i = 0; i < amount; i += 1) {
     createPromise(i + 1, delay + i * delayStep)
@@ -33,7 +30,6 @@ function onBtnClick(e) {
 function createPromise(position, delay) {
   return new Promise((resolve, reject) => {
     const shouldResolve = Math.random() > 0.3;
-
     setTimeout(() => {
       if (shouldResolve) {
         resolve({ position, delay });
