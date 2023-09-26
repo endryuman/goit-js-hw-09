@@ -1,20 +1,23 @@
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
-const formEl = document.querySelector('.form');
-const delayEl = document.getElementsByName('delay');
-const stepEl = document.getElementsByName('step');
-const amountEl = document.getElementsByName('amount');
-const btn = document.querySelector('button');
-console.log(formEl);
+const refs = {
+  form: document.querySelector('.form'),
+  inputDelay: document.querySelector('input[name = "delay"]'),
+  inputStep: document.querySelector('input[name = "step"]'),
+  inputAmount: document.querySelector('input[name = "amount"]'),
+  btn: document.querySelector('button'),
+};
 
-formEl.addEventListener('submit', onBtnClick);
+refs.form.addEventListener('submit', onBtnClick);
 
 function onBtnClick(e) {
   e.preventDefault();
 
-  const amount = parseInt(amountEl.value);
-  const delay = parseInt(delayEl.value);
-  const delayStep = parseInt(stepEl.value);
+  const amount = parseInt(refs.inputAmount.value);
+  const delay = parseInt(refs.inputDelay.value);
+  const delayStep = parseInt(refs.inputStep.value);
+
+  // console.log(delay, delayStep, amount);
 
   for (let i = 0; i < amount; i += 1) {
     createPromise(i + 1, delay + i * delayStep)
@@ -37,6 +40,6 @@ function createPromise(position, delay) {
       } else {
         reject({ position, delay });
       }
-    });
+    }, delay);
   });
 }
